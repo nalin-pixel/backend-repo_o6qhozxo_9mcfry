@@ -1,20 +1,19 @@
 INFO:     Will watch for changes in these directories: ['/home/workspace']
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [196] using StatReload
-INFO:     Started server process [198]
+INFO:     Started reloader process [240] using StatReload
+INFO:     Started server process [242]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
-INFO:     172.20.0.1:54814 - "GET /leaderboard/691d955c91bd5697268ffe8e HTTP/1.1" 200 OK
-INFO:     172.20.0.1:54820 - "POST /seed HTTP/1.1" 200 OK
-INFO:     172.20.0.1:54836 - "POST /seed HTTP/1.1" 200 OK
-INFO:     172.20.0.1:54842 - "HEAD / HTTP/1.1" 405 Method Not Allowed
-INFO:     172.20.0.1:54820 - "GET /maps HTTP/1.1" 200 OK
-INFO:     172.20.0.1:54836 - "GET /vehicles HTTP/1.1" 200 OK
-INFO:     172.20.0.1:54820 - "GET /maps HTTP/1.1" 200 OK
-INFO:     172.20.0.1:54836 - "GET /vehicles HTTP/1.1" 200 OK
-INFO:     172.20.0.1:54848 - "POST /seed HTTP/1.1" 200 OK
-INFO:     172.20.0.1:41148 - "POST /seed HTTP/1.1" 200 OK
-INFO:     172.20.0.1:54848 - "GET /maps HTTP/1.1" 200 OK
-INFO:     172.20.0.1:41164 - "GET /vehicles HTTP/1.1" 200 OK
-INFO:     172.20.0.1:54848 - "GET /maps HTTP/1.1" 200 OK
-INFO:     172.20.0.1:41164 - "GET /vehicles HTTP/1.1" 200 OK
+INFO:     172.20.0.1:38474 - "HEAD / HTTP/1.1" 405 Method Not Allowed
+INFO:     172.20.0.1:38476 - "POST /seed HTTP/1.1" 200 OK
+INFO:     172.20.0.1:38486 - "POST /seed HTTP/1.1" 200 OK
+INFO:     172.20.0.1:38476 - "GET /vehicles HTTP/1.1" 200 OK
+INFO:     172.20.0.1:38486 - "GET /maps HTTP/1.1" 200 OK
+INFO:     172.20.0.1:38476 - "GET /vehicles HTTP/1.1" 200 OK
+INFO:     172.20.0.1:38486 - "GET /maps HTTP/1.1" 200 OK
+INFO:     172.20.0.1:50110 - "POST /seed HTTP/1.1" 200 OK
+INFO:     172.20.0.1:50112 - "POST /seed HTTP/1.1" 200 OK
+INFO:     172.20.0.1:50110 - "GET /maps HTTP/1.1" 200 OK
+INFO:     172.20.0.1:50112 - "GET /vehicles HTTP/1.1" 200 OK
+INFO:     172.20.0.1:50110 - "GET /maps HTTP/1.1" 200 OK
+INFO:     172.20.0.1:50112 - "GET /vehicles HTTP/1.1" 200 OK
