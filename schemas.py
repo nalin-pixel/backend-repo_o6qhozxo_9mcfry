@@ -1,48 +1,61 @@
 """
-Database Schemas
+Database Schemas for Racing UI (FiveM-style)
 
-Define your MongoDB collection schemas here using Pydantic models.
-These schemas are used for data validation in your application.
-
-Each Pydantic model represents a collection in your database.
-Model name is converted to lowercase for the collection name:
-- User -> "user" collection
-- Product -> "product" collection
-- BlogPost -> "blogs" collection
+Each Pydantic model corresponds to a MongoDB collection. The collection name is the lowercase
+class name (e.g., Race -> "race").
 """
 
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import List, Optional
+from datetime import datetime
 
-# Example schemas (replace with your own):
 
-class User(BaseModel):
+class Vehicle(BaseModel):
     """
-    Users collection schema
-    Collection name: "user" (lowercase of class name)
+    Vehicles that can be selected for a race
+    Collection: "vehicle"
     """
-    name: str = Field(..., description="Full name")
-    email: str = Field(..., description="Email address")
-    address: str = Field(..., description="Address")
-    age: Optional[int] = Field(None, ge=0, le=120, description="Age in years")
-    is_active: bool = Field(True, description="Whether user is active")
+    name: str = Field(..., description="Display name, e.g., Zentorno")
+    code: str = Field(..., description="Spawn code / identifier")
+    class_name: Optional[str] = Field(None, description="Vehicle class/category")
+    is_enabled: bool = Field(True, description="Whether the vehicle is selectable")
 
-class Product(BaseModel):
+
+class Map(BaseModel):
     """
-    Products collection schema
-    Collection name: "product" (lowercase of class name)
+    Race maps/tracks available to run
+    Collection: "map"
     """
-    title: str = Field(..., description="Product title")
-    description: Optional[str] = Field(None, description="Product description")
-    price: float = Field(..., ge=0, description="Price in dollars")
-    category: str = Field(..., description="Product category")
-    in_stock: bool = Field(True, description="Whether product is in stock")
+    name: str = Field(..., description="Map name")
+    code: str = Field(..., description="Unique code/slug for the map")
+    author: Optional[str] = Field(None, description="Map author")
+    lap_length_m: Optional[int] = Field(None, ge=0, description="Approx lap length in meters")
+    checkpoints: Optional[List[dict]] = Field(None, description="List of checkpoints with coords")
+    is_enabled: bool = Field(True)
 
-# Add your own schemas here:
-# --------------------------------------------------
 
-# Note: The Flames database viewer will automatically:
-# 1. Read these schemas from GET /schema endpoint
-# 2. Use them for document validation when creating/editing
-# 3. Handle all database operations (CRUD) directly
-# 4. You don't need to create any database endpoints!
+class Race(BaseModel):
+    """
+    A race session with chosen map, laps and allowed vehicles
+    Collection: "race"
+    """
+    map_code: str = Field(...)
+    laps: int = Field(..., ge=1, le=100)
+    allowed_vehicle_codes: List[str] = Field(default_factory=list)
+    created_by: Optional[str] = Field(None)
+    status: str = Field("pending", description="pending|active|finished|cancelled")
+    starts_at: Optional[datetime] = None
+
+
+class Entry(BaseModel):
+    """
+    Per-player race entry for results/leaderboard
+    Collection: "entry"
+    """
+    race_id: str = Field(...)
+    player_name: str = Field(...)
+    vehicle_code: str = Field(...)
+    total_time_ms: Optional[int] = Field(None, ge=0)
+    best_lap_ms: Optional[int] = Field(None, ge=0)
+    laps_completed: int = Field(0, ge=0)
+    position: Optional[int] = Field(None, ge=1)
